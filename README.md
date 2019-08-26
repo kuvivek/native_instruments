@@ -31,7 +31,7 @@ virtual environment. The command to activate the same is:
 
 >     (rest_api) [kuvivek@vivekcentos native_instruments]$ 
 >     (rest_api) [kuvivek@vivekcentos native_instruments]$ ls
->     app.py  chores-collection.db  database_setup.py  database_setup.pyc  __init__.py  populate_db.py  populate_db.pyc  README.md resources.py  resources.pyc  rest_api
+>     app.py  database_setup.py  docker-compose.yml  Dockerfile  __init__.py  populate_db.py  README.md  requirements.txt  resources.py  rest_api
 >     (rest_api) [kuvivek@vivekcentos native_instruments]$ 
 
 The flask web based application server need to be started. The starting point of this application server is app.py. end Inorder to start the application server, so as to expose the sought REST API calls and support the Stanadard  HTTP Headers, following commands is used:
@@ -184,8 +184,11 @@ function, change it to 0.0.0.0. So that it is accessible from outside world.
 
 Executing the following command, builds the image and launches the Web application container, and all the behaviours can be tested locally using the curl command.
 
-    [kuvivek@vivekcentos native_instruments]$
-    [kuvivek@vivekcentos native_instruments]$ sudo /usr/local/bin/docker-compose up
+    (rest_api) [kuvivek@vivekcentos native_instruments]$ which docker-compose
+    /usr/local/bin/docker-compose
+    (rest_api) [kuvivek@vivekcentos native_instruments]$ 
+    (rest_api) [kuvivek@vivekcentos native_instruments]$ 
+    (rest_api) [kuvivek@vivekcentos native_instruments]$ sudo /usr/local/bin/docker-compose up
     Building web
     Step 1/6 : FROM python:2.7
     2.7: Pulling from library/python
@@ -202,18 +205,18 @@ Executing the following command, builds the image and launches the Web applicati
     Status: Downloaded newer image for python:2.7
      ---> d75b4eed9ada
     Step 2/6 : MAINTAINER Vivek Kumar, vivekkumar.bitsindri@gmail.com
-     ---> Running in b1708cdc88d6
-    Removing intermediate container b1708cdc88d6
-     ---> ff1b311cbbcf
+     ---> Running in 7705a10afef4
+    Removing intermediate container 7705a10afef4
+     ---> f046790583f3
     Step 3/6 : COPY ./requirements.txt /code/requirements.txt
-     ---> a699d2eb625d
+     ---> 3b8d568c31e6
     Step 4/6 : WORKDIR /code
-     ---> Running in b0e10164648e
-    Removing intermediate container b0e10164648e
-     ---> 508eeae87a53
+     ---> Running in f755ab209cd5
+    Removing intermediate container f755ab209cd5
+     ---> 3f54a9c869f6
     Step 5/6 : RUN pip install -r requirements.txt
-     ---> Running in 257771b5f7a9
-    DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 wouldn't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+     ---> Running in 5bab97aed882
+    DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
     Collecting Click==7.0 (from -r requirements.txt (line 1))
       Downloading https://files.pythonhosted.org/packages/fa/37/45185cb5abbc30d7257104c434fe0b07e5a195a6847506c074527aa599ec/Click-7.0-py2.py3-none-any.whl (81kB)
     Collecting Flask==1.1.1 (from -r requirements.txt (line 2))
@@ -233,30 +236,31 @@ Executing the following command, builds the image and launches the Web applicati
     Building wheels for collected packages: SQLAlchemy
       Building wheel for SQLAlchemy (setup.py): started
       Building wheel for SQLAlchemy (setup.py): finished with status 'done'
-      Created wheel for SQLAlchemy: filename=SQLAlchemy-1.3.6-cp27-cp27mu-linux_x86_64.whl size=1183929 sha256=b2fb9155f55ad95988c4dc555da49cb1c85c21f491210f3ef365bbd7735d6669
+      Created wheel for SQLAlchemy: filename=SQLAlchemy-1.3.6-cp27-cp27mu-linux_x86_64.whl size=1183954 sha256=c3419564240f90ce382d9e57685e4eb1689d15ecea9c0dded7959933316fdfbb
       Stored in directory: /root/.cache/pip/wheels/f2/ec/e0/d7deb0c981557e373edf7370574b7001690892afe5fea30c3c
     Successfully built SQLAlchemy
     Installing collected packages: Click, Werkzeug, itsdangerous, MarkupSafe, Jinja2, Flask, Flask-Caching, SQLAlchemy
     Successfully installed Click-7.0 Flask-1.1.1 Flask-Caching-1.7.2 Jinja2-2.10.1 MarkupSafe-1.1.1 SQLAlchemy-1.3.6 Werkzeug-0.15.5 itsdangerous-1.1.0
-    Removing intermediate container 257771b5f7a9
-     ---> 438bdb5bbbbc
+    WARNING: You are using pip version 19.2.2, however version 19.2.3 is available.
+    You should consider upgrading via the 'pip install --upgrade pip' command.
+    Removing intermediate container 5bab97aed882
+     ---> 98eb80bfa659
     Step 6/6 : CMD python app.py
-     ---> Running in 6abfc47fcb0b
-    Removing intermediate container 6abfc47fcb0b
-     ---> 960b38b1cb55
-    Successfully built 960b38b1cb55
+     ---> Running in 701b63fd72e5
+    Removing intermediate container 701b63fd72e5
+     ---> 5ed932067546
+    Successfully built 5ed932067546
     Successfully tagged native_instruments_web:latest
     WARNING: Image for service web was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
-    Creating native_instruments_web_1_8dbcce0886c3 ... done
-    Attaching to native_instruments_web_1_d4e0dc6eb82b
-    web_1_d4e0dc6eb82b |  * Serving Flask app "app" (lazy loading)
-    web_1_d4e0dc6eb82b |  * Environment: production
-    web_1_d4e0dc6eb82b |    WARNING: This is a development server. Do not use it in a production deployment.
-    web_1_d4e0dc6eb82b |    Use a production WSGI server instead.
-    web_1_d4e0dc6eb82b |  * Debug mode: on
-    web_1_d4e0dc6eb82b |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-    web_1_d4e0dc6eb82b |  * Restarting with stat
-    web_1_d4e0dc6eb82b |  * Debugger is active!
-    web_1_d4e0dc6eb82b |  * Debugger PIN: 203-920-586
-
+    Creating native_instruments_web_1_e78eaebaaf02 ... done
+    Attaching to native_instruments_web_1_a15cf8fef3ab
+    web_1_a15cf8fef3ab |  * Serving Flask app "app" (lazy loading)
+    web_1_a15cf8fef3ab |  * Environment: production
+    web_1_a15cf8fef3ab |    WARNING: This is a development server. Do not use it in a production deployment.
+    web_1_a15cf8fef3ab |    Use a production WSGI server instead.
+    web_1_a15cf8fef3ab |  * Debug mode: on
+    web_1_a15cf8fef3ab |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+    web_1_a15cf8fef3ab |  * Restarting with stat
+    web_1_a15cf8fef3ab |  * Debugger is active!
+    web_1_a15cf8fef3ab |  * Debugger PIN: 697-470-609
 
