@@ -48,8 +48,8 @@ The flask web based application server need to be started. The starting point of
      * Debugger is active!
      * Debugger PIN: 113-909-490
 
-4) Now run another terminal and execute the curl commands to verify all the 
-Standard HTTP protocols.
+4) Now run another terminal and execute the curl commands to verify all the Standard HTTP protocols.
+Note: For getting errorcode, from any of the curl command, add -i option, as shown in HEAD request below.
 
 Since there are no records initially, Hence reporting empty list.
 
